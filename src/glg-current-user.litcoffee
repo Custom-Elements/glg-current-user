@@ -3,12 +3,25 @@
 Renders the body content if, and only if, there is a current authenticated user present. The current user is
 exposed to the context, and has the following properties:
 
-| Property | Sample Value         |
-|---------------------------------|
-| name     | Duane Fields         |
-| username | dfields              |
-| email    | dfields@glgroup.com  |
-
+  * firstName
+  * middleInitial
+  * lastName
+  * loginName
+  * email
+  * personId
+  * title
+  * phoneMain
+  * extension
+  * fax
+  * street1
+  * street2
+  * city
+  * state
+  * zip
+  * userId (number)
+  * personId (number)
+  * phone
+  * mobile
 
 Create our element...
 
@@ -29,7 +42,10 @@ Create our element...
           self.currentUser = results[0] if results.length > 0
           console.log self.currentUser
 
-        request.open("GET", "https://epiquery.glgroup.com/person/getUserByEmail.mustache?Email=dfields@glgroup.com", true)
+        # todo read from cookie
+        login = "glgroup%5Cdfields"
+
+        request.open("GET", "https://epiquery.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=#{login}", true)
         request.send()
 
 
