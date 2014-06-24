@@ -23,6 +23,11 @@ exposed to the context, and has the following properties:
   * phone
   * mobile
 
+## Dependencies
+
+    Cookies = require 'cookies-js'
+    QueryString = require 'query-string'
+
 Create our element...
 
     Polymer 'glg-current-user',
@@ -34,20 +39,30 @@ Create our element...
 
 ## Methods
 
+Fetch full details for the current user by reading the auth cookie, and fetching them from the database.
+
       getCurrentUser: ->
-        self = this
+        # parse our the glgroot cookies, which is itself a querystring
+        userParams = QueryString.parse Cookies.get 'glgroot'
+        username = userParams['username']
+        if username
+          console.log "Current user appears to be #{username}"
+        else
+          console.log "No current user found"
+          return
+
+        # prepare our request
         request = new XMLHttpRequest()
+        self = this
         request.onload = (e) ->
           results = JSON.parse(this.responseText)
           self.currentUser = results[0] if results.length > 0
+          console.log "Successfully fetched user"
           console.log self.currentUser
 
-        # todo read from cookie
-        login = "glgroup%5Cdfields"
-
-        request.open("GET", "https://epiquery.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=#{login}", true)
+        # make the request
+        request.open("GET", "https://epiquery.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=#{username}", true)
         request.send()
-
 
 ## Event Handlers
 

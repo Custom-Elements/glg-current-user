@@ -2,10 +2,12 @@
   "name": "glg-current-user",
   "version": "0.0.0",
   "dependencies": {
-    "polymer-tools": "git://github.com/custom-elements/polymer-tools#master",
+    "cookies-js": "^0.4.0",
     "polymer": "git://github.com/custom-elements/polymer#master",
-    "ui-styles": "git://github.com/custom-elements/ui-styles#master",
-    "ui-fonts": "git://github.com/custom-elements/ui-fonts#master"
+    "polymer-tools": "git://github.com/custom-elements/polymer-tools#master",
+    "query-string": "^0.4.0",
+    "ui-fonts": "git://github.com/custom-elements/ui-fonts#master",
+    "ui-styles": "git://github.com/custom-elements/ui-styles#master"
   },
   "license": "ISC",
   "scripts": {
