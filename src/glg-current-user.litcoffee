@@ -12,6 +12,10 @@ Create our element...
 
     Polymer 'glg-current-user',
 
+## Events
+###user
+Fire this with the user when fetched. Sometimes you don't want or need to bind.
+
 ## Methods
 
 Fetch full details for the current user by reading the auth cookie, and fetching them from the database.
@@ -29,30 +33,18 @@ Fetch full details for the current user by reading the auth cookie, and fetching
 
         # prepare our request
         request = new XMLHttpRequest()
-        self = this
-        request.onload = (e) ->
-          results = JSON.parse(this.responseText)
-          self.currentUser = results[0] if results.length > 0
-          console.log "Successfully fetched user"
-          console.log self.currentUser
+        request.onload = (e) =>
+          results = JSON.parse(request.responseText)
+          @currentUser = results[0] if results.length > 0
+          console.log "Successfully fetched user", @currentUser
+          @fire 'user', @currentUser
 
         # make the request
         request.open("GET", "https://epiquery.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=#{username}", true)
         request.send()
 
 ## Polymer Lifecycle
-
-We want to essentially use the body of our glg-current-user element as a template with access to the current
-user and its properties. Normally we can't do this, but if we dynamically create our template, we are using the
-content of the light DOM to build up shadow DOM elements. The content template is used via ref tag to render
-dynamically. Note that we have to do this first, before setting `currentUser`.
-
-      ready: ->
-        contentTemplate = document.createElement 'template'
-        contentTemplate.id = 'content'
-        contentTemplate.innerHTML = @innerHTML
-        @shadowRoot.appendChild contentTemplate
-
 Fetch the current user by reading the auth cookie, then doing the full lookup.
 
+      attached: ->
         @getCurrentUser()
