@@ -34,8 +34,8 @@ Fetch full details for the current user by reading the auth cookie, and fetching
         request = new XMLHttpRequest()
         request.onload = (e) =>
           results = JSON.parse(request.responseText)
-          console.log "Successfully fetched user", @currentuser
           @currentuser = results[0] if results.length > 0
+          console.log "Successfully fetched user", @currentuser
           @fire 'user', @currentuser
           Platform.performMicrotaskCheckpoint()
 
