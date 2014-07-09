@@ -7,7 +7,8 @@ exposed to the context.
 
     Cookies = require 'cookies-js'
     QueryString = require 'query-string'
-    async = require 'async'
+    Async = require 'async'
+
 
 Create our element...
 
@@ -20,34 +21,34 @@ Fire this with the user when fetched. Sometimes you don't want or need to bind.
 ## Methods
 
 Fetch full details for the current user by reading the auth cookie, and fetching them from the database.
-
-      getCurrentUser:(cb) ->
+    
+      getCurrentUser: ->
         # parse our the glgroot cookies, which is itself a querystring
         userParams = QueryString.parse Cookies.get 'glgroot'
-        username = userParams['username']
-        if username
-          console.log "Current user appears to be #{username}"
-          cb(null, username)
+        @$.username = userParams['username']
+        if @$.username
+          console.log "Current user appears to be #{@$.username}"
         else
           console.log "No current user found"
           return
-      
-      getUserDetails: (username, cb) ->
-        # prepare our request
-        request = new XMLHttpRequest()
-        request.onload = (e) =>
-          results = JSON.parse(request.responseText)
-          @currentuser = results[0] if results.length > 0
-          cb(cb,@currentuser)
+        @$.userdetails.url="https://query.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=#{@$.username}&callback="
+        @$.userdetails.go()
 
-        # make the request
-        request.open("GET", "https://epiquery.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=#{username}", true)
-        request.send()
+      getuserdetails: (evt) ->
+        @$.current_user = evt.detail.response[0]
+        @$.user=@$.username.split("\\")[1]
+        @$.betalist.url="http://kvstore.glgroup.com/kv/__user_betas__/#{@$.user}?callback="
+        @$.betalist.go()
 
-      completed: (err, currentuser) ->
-       console.log "Successfully fetched user", currentuser
-       #@fire 'user', currentuser
+      getbetagroups: (evt) ->
+        user = @$.user
+        @$.current_user.betagroups = evt.detail.response[user] 
+        @completed()
+
+      completed: () ->
+       @.fire 'user', @$.current_user
        Platform.performMicrotaskCheckpoint()
+
 
 
 
@@ -56,4 +57,4 @@ Fetch full details for the current user by reading the auth cookie, and fetching
 Fetch the current user by reading the auth cookie, then doing the full lookup.
 
       attached: ->
-        async.waterfall([@getCurrentUser,@getUserDetails], @completed)
+        @getCurrentUser()
