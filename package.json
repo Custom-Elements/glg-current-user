@@ -2,7 +2,6 @@
   "name": "glg-current-user",
   "version": "0.0.0",
   "dependencies": {
-    "async": "^0.9.0",
     "cookies-js": "^0.4.0",
     "polymer": "git://github.com/custom-elements/polymer#master",
     "polymer-tools": "git://github.com/custom-elements/polymer-tools#master",

@@ -7,8 +7,6 @@ exposed to the context.
 
     Cookies = require 'cookies-js'
     QueryString = require 'query-string'
-    Async = require 'async'
-
 
 Create our element...
 
