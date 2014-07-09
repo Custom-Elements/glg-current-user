@@ -27,6 +27,7 @@ See [src/glg-current-user.litcoffee](src/glg-current-user.litcoffee) for more de
   * personId (number)
   * phone
   * mobile
+  * betagroups (array)
 
 ### Typical Usage
 
