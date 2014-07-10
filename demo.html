@@ -28,6 +28,10 @@
         //poke your element here
       })
     </script>
-
+    <script>
+  document.querySelector('glg-current-user').addEventListener('user', function(e) {
+          console.log(e.detail); // "ouch" "That hurt!"
+            });
+    </script>
   </body>
 </html>

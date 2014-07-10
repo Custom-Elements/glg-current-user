@@ -1,7 +1,15 @@
+<link rel="import" href="../lib/polymer-jsonp.html" />
 <polymer-element name="glg-current-user" attributes="currentuser">
   <template>
     <link rel="stylesheet" type="text/css" href="./glg-current-user.less">
     <content></content>
+    <polymer-jsonp id="betalist"
+      on-polymer-response="{{getbetagroups}}">
+    </polymer-jsonp>
+    <polymer-jsonp id="userdetails"
+      on-polymer-response="{{getuserdetails}}">
+    </polymer-jsonp>
   </template>
   <script src="./glg-current-user.litcoffee"></script>
+
 </polymer-element>
