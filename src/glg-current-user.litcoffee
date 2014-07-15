@@ -29,13 +29,13 @@ Fetch full details for the current user by reading the auth cookie, and fetching
         else
           console.log "No current user found"
           return
-        @$.userdetails.url="https://query.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=#{@$.username}&callback="
+        @$.userdetails.url="//query.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=#{@$.username}&callback="
         @$.userdetails.go()
 
       getuserdetails: (evt) ->
         @$.current_user = evt.detail.response[0]
         @$.user=@$.username.split("\\")[1]
-        @$.betalist.url="http://kvstore.glgroup.com/kv/__user_betas__/#{@$.user}?callback="
+        @$.betalist.url="//kvstore.glgroup.com/kv/__user_betas__/#{@$.user}?callback="
         @$.betalist.go()
 
       getbetagroups: (evt) ->
