@@ -8,9 +8,16 @@ exposed to the context.
     Cookies = require 'cookies-js'
     QueryString = require 'query-string'
 
-Create our element...
-
     Polymer 'glg-current-user',
+
+##Attributs
+###username
+This is who you are. Changing this gets your user data.
+
+      usernameChanged: ->
+        if @username
+          @$.userdetails.url="//query.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=#{@username}&callback="
+          @$.userdetails.go()
 
 ## Events
 ###user
@@ -24,13 +31,6 @@ Fetch full details for the current user by reading the auth cookie, and fetching
         # parse our the glgroot cookies, which is itself a querystring
         userParams = QueryString.parse Cookies.get 'glgroot'
         @username = userParams['username']
-        if @username
-          console.log "Current user appears to be #{@username}"
-        else
-          console.log "No current user found"
-          return
-        @$.userdetails.url="//query.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=#{@username}&callback="
-        @$.userdetails.go()
 
       getuserdetails: (evt) ->
         @currentuser = evt.detail.response[0]
@@ -48,4 +48,7 @@ Fetch full details for the current user by reading the auth cookie, and fetching
 Fetch the current user by reading the auth cookie, then doing the full lookup.
 
       attached: ->
-        @getCurrentUser()
+        if window.debugUserName
+          @username = window.debugUserName
+        else
+          @getCurrentUser()
