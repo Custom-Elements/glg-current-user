@@ -18,7 +18,7 @@
     <div id="holder">
 
       <glg-current-user>
-        <span>Welcome <b>{{ firstName }}</b> from {{ city }}!</span>
+        <span>Welcome <b>{{user}}</b> from {{ city }}!</span>
       </glg-current-user>
 
     </div>
@@ -26,7 +26,7 @@
     <script>
       document.addEventListener('polymer-ready', function() {
         //poke your element here
-      })
+      });
     </script>
     <script>
   document.querySelector('glg-current-user').addEventListener('user', function(e) {
