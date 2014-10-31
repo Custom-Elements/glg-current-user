@@ -29,7 +29,7 @@ Fetch full details for the current user by reading the auth cookie, and fetching
 
       getCurrentUser: ->
         # parse our the glgroot cookies, which is itself a querystring
-        userParams = if (Cookies.get 'glgroot')? then QueryString.parse Cookies.get 'glgroot' else Cookies.get 'glgSAM'
+        userParams = if (Cookies.get 'glgroot')? then QueryString.parse Cookies.get 'glgroot' else Cookies.get 'starphleet_user'
         @username = if userParams['username']? then userParams['username'] else  'glgroup\\' + userParams
         #@username = userParams?['username'] userParams
 
