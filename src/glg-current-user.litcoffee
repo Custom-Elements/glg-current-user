@@ -30,8 +30,11 @@ Fetch full details for the current user by reading the auth cookie, and fetching
       getCurrentUser: ->
         # parse our the glgroot cookies, which is itself a querystring
         userParams = if (Cookies.get 'glgroot')? then QueryString.parse Cookies.get 'glgroot' else Cookies.get 'starphleet_user'
-        @username = if userParams['username']? then userParams['username'] else  'glgroup\\' + userParams
-        #@username = userParams?['username'] userParams
+        # another cookie, found in Vega manage members
+        if not userParams
+          userParams = Cookies.get 'glgSAM'
+        if userParams
+          @username = if userParams['username']? then userParams['username'] else  'glgroup\\' + userParams
 
       getuserdetails: (evt) ->
         @currentuser = evt.detail.response[0]
