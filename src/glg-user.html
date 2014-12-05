@@ -1,0 +1,16 @@
+<link rel="import" href="../bower_components/core-ajax/core-ajax.html" />
+<polymer-element name="glg-user" attributes="username currentuser">
+  <template>
+    <core-ajax
+    id="betalist"
+    handleAs="json"
+    withCredentials=true
+    on-core-response="{{getbetagroups}}"></core-ajax>
+    <core-ajax
+    id="userdetails"
+    handleAs="json"
+    withCredentials=true
+    on-core-response="{{getuserdetails}}"></core-ajax>
+  </template>
+  <script src="./glg-user.litcoffee"></script>
+</polymer-element>
