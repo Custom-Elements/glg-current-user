@@ -11,7 +11,7 @@ This is who you are. Changing this gets your user data.
 
       usernameChanged: ->
         if @username
-          @$.userdetails.url="https://query.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=#{@username}&callback="
+          @$.userdetails.url="https://query.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=glgroup\\#{@username}&callback="
           @$.userdetails.go()
 
 ## Events
@@ -28,8 +28,7 @@ Fire this with the user when fetched. Sometimes you don't want or need to bind.
         @$.betalist.go()
 
       getbetagroups: (evt) ->
-        user = @username.split("\\")[1]
-        @currentuser.betagroups = evt.detail.response[user]
+        @currentuser.betagroups = evt.detail.response[@username]
         @fire 'user', @currentuser
 
 ## Polymer Lifecycle

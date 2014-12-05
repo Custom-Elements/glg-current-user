@@ -6,6 +6,7 @@
     <script src="http://localhost:35729/livereload.js"></script>
     <link rel="import" href="node_modules/polymer/polymer.html">
     <link rel="import" href="src/glg-current-user.html">
+    <link rel="import" href="src/glg-avatar.html">
     <style>
       body {
         font-family: "Helvetica Neue", "Helvetica", Arial;
@@ -20,17 +21,15 @@
         <span>Welcome <b>{{user}}</b> from {{ city }}!</span>
       </glg-current-user>
 
+      <strong>Avatar!</strong>
+      <glg-avatar username="mhuggins"></glg-avatar>
+
     </div>
 
     <script>
       document.addEventListener('polymer-ready', function() {
         //poke your element here
       });
-    </script>
-    <script>
-  document.querySelector('glg-current-user').addEventListener('user', function(e) {
-          console.log(e.detail); // "ouch" "That hurt!"
-            });
     </script>
   </body>
 </html>

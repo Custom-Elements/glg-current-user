@@ -1,6 +1,11 @@
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html" />
 <polymer-element name="glg-user" attributes="username currentuser">
   <template>
+    <style>
+    :host {
+      display: none;
+    }
+    </style>
     <core-ajax
     id="betalist"
     handleAs="json"

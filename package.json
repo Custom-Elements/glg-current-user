@@ -8,7 +8,8 @@
     "polymer-tools": "git://github.com/custom-elements/polymer-tools#master",
     "query-string": "^0.4.0",
     "ui-fonts": "git://github.com/custom-elements/ui-fonts#master",
-    "ui-styles": "git://github.com/custom-elements/ui-styles#master"
+    "ui-styles": "git://github.com/custom-elements/ui-styles#master",
+    "ui-avatar": "git://github.com/custom-elements/ui-avatar#master"
   },
   "license": "ISC",
   "scripts": {

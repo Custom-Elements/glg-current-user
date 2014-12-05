@@ -23,7 +23,12 @@ Fetch full details for the current user by reading the auth cookie, and fetching
         if not userParams
           userParams = Cookies.get 'glgSAM'
         if userParams
-          @username = if userParams['username']? then userParams['username'] else  'glgroup\\' + userParams
+          if userParams['username']?
+            bits = userParams['username'].split '\\'
+            @username = if bits.length is 2 then bits[1] else bits[0]
+          else
+            @username = userParams
+
 
 ## Polymer Lifecycle
 Fetch the current user by reading the auth cookie, then doing the full lookup.
