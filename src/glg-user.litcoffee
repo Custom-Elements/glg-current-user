@@ -10,7 +10,10 @@ All about a GLG user.
 This is who you are. Changing this gets your user data.
 
       usernameChanged: ->
-        if @username
+        if window.glgUserCache[@username]
+          @currentuser = window.glgUserCache[@username]
+          @fire 'user', @currentuser
+        else if @username
           @$.userdetails.url="https://query.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=#{@domainifyUsername(@username)}&callback="
           @$.userdetails.go()
 
@@ -40,6 +43,10 @@ Fire this with the user when fetched. Sometimes you don't want or need to bind.
 
       getbetagroups: (evt) ->
         @currentuser.betagroups = evt.detail.response[@dedomainifyUsername(@username)]
+        window.glgUserCache[@username] = @currentuser
         @fire 'user', @currentuser
 
 ## Polymer Lifecycle
+
+      created: ->
+        window.glgUserCache = window.glgUserCache or {}

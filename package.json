@@ -13,7 +13,7 @@
   },
   "license": "ISC",
   "scripts": {
-    "test": "polymer-build watch . src/ build/",
+    "test": "polymer-serve .",
     "postinstall": "bower install"
   }
 }
