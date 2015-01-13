@@ -8,6 +8,8 @@
       }
     </style>
     <glg-user username="{{username}}" currentuser="{{currentuser}}"></glg-user>
-    <ui-avatar name="{{currentuser.firstName + ' ' + currentuser.lastName}}"></ui-avatar>
+    <template if="{{currentuser}}">
+      <ui-avatar name="{{currentuser.firstName + ' ' + currentuser.lastName}}"></ui-avatar>
+    </template>
   </template>
 </polymer-element>

@@ -37,9 +37,10 @@ Fire this with the user when fetched. Sometimes you don't want or need to bind.
 
       getuserdetails: (evt) ->
         @currentuser = evt.detail.response[0]
-        user = @username.split("\\")[1]
-        @$.betalist.url="https://kvstore.glgroup.com/kv/__user_betas__/#{@dedomainifyUsername(@username)}"
-        @$.betalist.go()
+        if @currentuser
+          user = @username.split("\\")[1]
+          @$.betalist.url="https://kvstore.glgroup.com/kv/__user_betas__/#{@dedomainifyUsername(@username)}"
+          @$.betalist.go()
 
       getbetagroups: (evt) ->
         @currentuser.betagroups = evt.detail.response[@dedomainifyUsername(@username)]
