@@ -46,8 +46,8 @@ Fire this with the user when fetched. Sometimes you don't want or need to bind.
         window.glgUserCache[@username] = @currentuser
         displayTemplate = @querySelector 'template'
         if displayTemplate
-          displayTemplate.setAttribute 'bind', '{{currentuser}}'
-          displayTemplate.model = currentuser: @currentuser
+          displayTemplate.setAttribute 'bind', '{{value}}'
+          displayTemplate.model = value: @currentuser
         @fire 'user', @currentuser
 
 ## Polymer Lifecycle
