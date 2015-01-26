@@ -3,7 +3,7 @@
   <template>
     <style>
     :host {
-      display: none;
+      display: flex;
     }
     </style>
     <core-ajax
@@ -16,6 +16,7 @@
     handleAs="json"
     withCredentials=true
     on-core-response="{{getuserdetails}}"></core-ajax>
+    <content></content>
   </template>
   <script src="./glg-user.litcoffee"></script>
 </polymer-element>

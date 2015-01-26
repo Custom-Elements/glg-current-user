@@ -44,6 +44,10 @@ Fire this with the user when fetched. Sometimes you don't want or need to bind.
       getbetagroups: (evt) ->
         @currentuser.betagroups = evt.detail.response[@dedomainifyUsername(@username)]
         window.glgUserCache[@username] = @currentuser
+        displayTemplate = @querySelector 'template'
+        if displayTemplate
+          displayTemplate.setAttribute 'bind', '{{currentuser}}'
+          displayTemplate.model = currentuser: @currentuser
         @fire 'user', @currentuser
 
 ## Polymer Lifecycle

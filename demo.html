@@ -17,11 +17,13 @@
   <body unresolved>
     <div id="holder">
 
-      <glg-current-user>
-        <span>Welcome <b>{{user}}</b> from {{ city }}!</span>
+      <glg-current-user username="mhuggins">
+        <template>
+          <span>Welcome <b>{{firstName}}</b> from {{city}}!</span>
+        </template>
       </glg-current-user>
 
-      <strong>Avatar!</strong>
+      <h3>Avatars!</h3>
       <glg-avatar username="mhuggins"></glg-avatar>
       <glg-avatar username="wballard"></glg-avatar>
       <glg-avatar username="mhuggins"></glg-avatar>
