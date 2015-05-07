@@ -37,17 +37,6 @@ Fire this with the user when fetched. Sometimes you don't want or need to bind.
 
       getuserdetails: (evt) ->
         @currentuser = evt.detail.response[0]
-        if @currentuser
-          @$.betalist.url="https://kvstore.glgroup.com/kv/__user_betas__/#{@dedomainifyUsername(@username)}"
-          @$.betalist.go()
-
-      getbetagroups: (evt) ->
-        @currentuser.betagroups = evt.detail.response[@dedomainifyUsername(@username)]
-        window.glgUserCache[@username] = @currentuser
-        displayTemplate = @querySelector 'template'
-        if displayTemplate
-          displayTemplate.setAttribute 'bind', '{{value}}'
-          displayTemplate.model = value: @currentuser
         @fire 'user', @currentuser
 
 ## Polymer Lifecycle
