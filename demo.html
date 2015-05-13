@@ -10,6 +10,14 @@
       body {
         font-family: "Helvetica Neue", "Helvetica", Arial;
       }
+
+      small {
+        font-size: 50%;
+      }
+
+      h3 {
+        margin-bottom: 0;
+      }
     </style>
   </head>
 
@@ -27,11 +35,38 @@
       <glg-avatar username="wballard"></glg-avatar>
       <glg-avatar username="mhuggins"></glg-avatar>
 
+      <h3><code>currentuser</code> property</h3>
+      <small>This demo probably won't work on localhost since it's looking
+        for cookies to determine who you are!</small>
+      <glg-current-user id="drhayesElem"></glg-current-user>
+      <pre id="drhayesResults"></pre>
+
+      <h3><code>user</code> event - mhuggins</h3>
+      <glg-current-user id="currentElem" username="mhuggins"></glg-current-user>
+      <pre id="currentResults"></pre>
+
     </div>
 
     <script>
       document.addEventListener('polymer-ready', function() {
-        //poke your element here
+        // Read the currentuser property when ready.
+        var drhayesElem = document.getElementById('drhayesElem');
+        var drhayesResults = document.getElementById('drhayesResults');
+        Object.observe(drhayesElem, function(changes) {
+          changes.forEach(function(c) {
+            if (c.name === 'currentuser') {
+              drhayesResults.innerHTML = JSON.stringify(drhayesElem.currentuser, null, 2);
+            }
+          });
+        });
+
+        // Subscribe to 'user' event.
+        var currentElem = document.getElementById('currentElem');
+        currentElem.addEventListener('user', function(e) {
+          console.log(e);
+          var currentResults = document.getElementById('currentResults');
+          currentResults.innerHTML = JSON.stringify(e.detail, null, 2);
+        });
       });
     </script>
   </body>
