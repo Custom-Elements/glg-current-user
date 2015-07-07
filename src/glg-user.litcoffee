@@ -14,7 +14,7 @@ This is who you are. Changing this gets your user data.
           @currentuser = window.glgUserCache[@username]
           @fire 'user', @currentuser
         else if @username
-          @$.userdetails.url="https://query.glgroup.com/glgCurrentUser/getUserByLogin.mustache?login=#{@domainifyUsername(@username)}&callback="
+          @$.userdetails.url="https://services.glgresearch.com/epiquery/glgCurrentUser/getUserByLogin.mustache?login=#{@domainifyUsername(@username)}&callback="
           @$.userdetails.go()
 
 ## Events
