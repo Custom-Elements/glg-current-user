@@ -25,7 +25,7 @@ Fire this with the user when fetched. Sometimes you don't want or need to bind.
 
       domainifyUsername: (name) ->
         if name.toLowerCase().indexOf('glgroup') is -1
-          "glgroup\\#{name}"
+          "glgroup%5c#{name}"
         else
           name
 
