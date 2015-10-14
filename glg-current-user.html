@@ -1,0 +1,28 @@
+<script src="../cookies-js/dist/cookies.js"></script>
+<script src="../querystring/querystring.js"></script>
+
+<link rel="import" href="../iron-ajax/iron-ajax.html"></link>
+
+<dom-module id="glg-current-user">
+  <style>
+    :host {
+      display: flex;
+    }
+  </style>
+
+  <template>
+
+    <iron-ajax
+      id="xhr"
+      handle-as="json"
+      with-credentials="true"
+      on-response="_handleUser"
+      url="[[url]]"
+      params="[[qs]]"></iron-ajax>
+
+    <content></content>
+
+  </template>
+</dom-module>
+
+<script src="./glg-current-user.js"></script>
