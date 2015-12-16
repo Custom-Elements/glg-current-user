@@ -18,13 +18,8 @@
     "/test/"
   ],
   "dependencies": {
-    "cookies-js": "Cookies#~1.2.2",
     "iron-ajax": "PolymerElements/iron-ajax#~1.0.6",
-    "paper-input": "PolymerElements/paper-input#~1.0.15",
     "polymer": "Polymer/polymer#^1.1.0",
-    "querystring": "~3.46.1"
-  },
-  "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0"
+    "js-cookie": "~2.0.4"
   }
 }
