@@ -35,7 +35,7 @@
       },
       username: {
         type: String,
-        value: function() {
+        computed: function() {
           var glgrootCookie = Cookies.getJSON('glgroot');
           var starphleetCookie = Cookies.getJSON('starphleet_user');
           var glgSAMCookie = Cookies.getJSON('glgSAM');
@@ -50,6 +50,11 @@
       user: {
         type: Object,
         notify: true
+      },
+      debug: {
+        type: Boolean,
+        notify: true,
+        value: false
       }
     },
     _domainifyUsername: function(name) {
