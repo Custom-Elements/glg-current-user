@@ -41,7 +41,8 @@
           var starphleetCookie = Cookies.getJSON('starphleet_user');
           var glgSAMCookie = Cookies.getJSON('glgSAM');
           var glguserCookie = Cookies.get('glguserinfo');
-          return  this._extractUserName(glgrootCookie, starphleetCookie, glgSAMCookie, glguserCookie);
+          var userCookie = Cookies.get('user');
+          return  this._extractUserName(glgrootCookie, starphleetCookie, glgSAMCookie, glguserCookie, userCookie);
         },
         observer: '_usernameChanged',
         notify: true,
@@ -81,11 +82,15 @@
         };
       })(this), 200);
     },
-    _extractUserName: function(glgrootCookie, starphleetCookie, glgSAMCookie, glguserCookie) {
-      if (typeof glgrootCookie == 'Object' && typeof glgrootCookie.username != 'undefined') {
+    _extractUserName: function(glgrootCookie, starphleetCookie, glgSAMCookie, glguserCookie, userCookie) {
+      if (typeof userCookie == 'Object' && typeof userCookie.username != 'undefined') {
+        return userCookie.username;
+      } else if (typeof glgrootCookie == 'Object' && typeof glgrootCookie.username != 'undefined') {
         return glgrootCookie.username;
       } else if (typeof starphleetCookie == 'Object' && typeof starphleetCookie.username != 'undefined') {
         return starphleetCookie.username;
+      } else if (typeof starphleetCookie == 'String' && starphleetCookie) {
+        return starphleetCookie;
       } else if (typeof glgSAMCookie  == 'Object' && typeof glgSAMCookie.username != 'undefined') {
         return glgSAMCookie.username;
       } else if (glguserCookie != '') {
