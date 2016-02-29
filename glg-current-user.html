@@ -82,15 +82,13 @@
       })(this), 200);
     },
     _extractUserName: function(glgrootCookie, starphleetCookie, glgSAMCookie, glguserCookie) {
-      if (typeof glgrootCookie == 'Object' && typeof glgrootCookie.username != 'undefined') {
-        return glgrootCookie.username;
-      } else if (typeof starphleetCookie == 'Object' && typeof starphleetCookie.username != 'undefined') {
-        return starphleetCookie.username;
-      } else if (typeof starphleetCookie == 'string' && starphleetCookie) {
+      if (typeof starphleetCookie === 'string') {
         return starphleetCookie;
-      } else if (typeof glgSAMCookie  == 'Object' && typeof glgSAMCookie.username != 'undefined') {
+      } else if (glgrootCookie === 'object' && glgrootCookie.username) {
+        return glgrootCookie.username;
+      } else if (typeof glgSAMCookie  === 'object' && glgSAMCookie.username) {
         return glgSAMCookie.username;
-      } else if (glguserCookie != '') {
+      } else if (glguserCookie) {
         try {
           return (JSON.parse(atob(glguserCookie))).username;
         }
