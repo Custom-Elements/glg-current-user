@@ -82,7 +82,7 @@
       })(this), 200);
     },
     _extractUserName: function(glgrootCookie, starphleetCookie, glgSAMCookie, glguserCookie) {
-      if (typeof starphleetCookie === 'string') {
+      if (typeof starphleetCookie === 'string' && starphleetCookie) {
         return starphleetCookie;
       } else if (glgrootCookie === 'object' && glgrootCookie.username) {
         return glgrootCookie.username;
