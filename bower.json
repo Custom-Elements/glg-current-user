@@ -18,8 +18,8 @@
     "/test/"
   ],
   "dependencies": {
-    "iron-ajax": "PolymerElements/iron-ajax#~1.0.6",
-    "polymer": "Polymer/polymer#^1.1.0",
+    "iron-ajax": "git+https://github.com/PolymerElements/iron-ajax#~1.0.6",
+    "polymer": "git+https://github.com/Polymer/polymer#^1.1.0",
     "js-cookie": "~2.0.4"
   }
 }
