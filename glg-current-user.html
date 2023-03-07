@@ -1,6 +1,6 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-ajax/iron-ajax.html"></link>
-<script src="../js-cookie/src/js.cookie.js"></script>
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/iron-ajax/iron-ajax.html"></link>
+<script src="bower_components/js-cookie/src/js.cookie.js"></script>
 
 <dom-module id="glg-current-user">
   <template>
@@ -13,10 +13,21 @@
       params="[[qs]]"
     >
     </iron-ajax>
+    <iron-ajax auto
+      id="gdsEcho"
+      handle-as="json"
+      with-credentials="true"
+      on-response="_handleGDSUser"
+      method="get"
+      url="[[echoUrl]]"
+      params="{'q': q}"
+    >
+    </iron-ajax>
     <template is="dom-if" if="{{debug}}">
       <div>Hello <span>[[user.firstName]]</span>,</div>
       <div>Your username is <span>{{user.loginName}}</span></div>
       <div>Your person ID is <span>{{user.personId}}</span></div>
+      <div>This is coming from GDS Echo: <span>{{GDSUser.x-identity}}</span> </div>
     </template>
   </template>
 </dom-module>
@@ -27,12 +38,16 @@
     properties: {
       url: {
         type: String,
-        value: 'https://epistream.glgresearch.com/epi/epiquery1/glglive/glgCurrentUser/getUserByLogin.mustache',
+        value: 'https://local.dev.glgresearch.com/epistream/epiquery1/glglive/glgCurrentUser/getUserByLogin.mustache',
       },
       qs: {
         type: Object,
         computed: '_buildQueryString(username)',
         value: ''
+      },
+      echoUrl: {
+        type: String,
+        value: 'https://local.dev.glgresearch.com/echo/'
       },
       username: {
         type: String,
@@ -66,7 +81,11 @@
       }
     },
     _handleUser: function(evt) {
-      this.user = evt.detail.response[0];
+      this.user = evt.detail.response[0]
+    },
+    _handleGDSUser: function(event, request) {
+      var response = request.response;
+      this.GDSUser = response;
     },
     _buildQueryString: function(name) {
       return {login : this._domainifyUsername(name)};
