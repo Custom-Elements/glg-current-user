@@ -18,16 +18,13 @@
       handle-as="json"
       with-credentials="true"
       on-response="_handleGDSUser"
-      method="get"
       url="[[echoUrl]]"
-      params="{'q': q}"
     >
     </iron-ajax>
     <template is="dom-if" if="{{debug}}">
       <div>Hello <span>[[user.firstName]]</span>,</div>
       <div>Your username is <span>{{user.loginName}}</span></div>
       <div>Your person ID is <span>{{user.personId}}</span></div>
-      <div>This is coming from GDS Echo: <span>{{GDSUser.x-identity}}</span> </div>
     </template>
   </template>
 </dom-module>
@@ -41,7 +38,7 @@
         value: 'https://local.dev.glgresearch.com/epistream/epiquery1/glglive/glgCurrentUser/getUserByLogin.mustache',
       },
       qs: {
-        type: Object,
+        type: String,
         computed: '_buildQueryString(username)',
         value: ''
       },
@@ -52,11 +49,7 @@
       username: {
         type: String,
         value: function() {
-          var glgrootCookie = Cookies.getJSON('glgroot');
-          var starphleetCookie = Cookies.getJSON('starphleet_user');
-          var glgSAMCookie = Cookies.getJSON('glgSAM');
-          var glguserCookie = Cookies.get('glguserinfo');
-          return  this._extractUserName(glgrootCookie, starphleetCookie, glgSAMCookie, glguserCookie);
+          return this.username
         },
         observer: '_usernameChanged',
         notify: true,
@@ -83,44 +76,25 @@
     _handleUser: function(evt) {
       this.user = evt.detail.response[0]
     },
-    _handleGDSUser: function(event, request) {
-      var response = request.response;
-      this.GDSUser = response;
+    _handleGDSUser: function(res) {
+      this.username = res.detail.response['x-identity']
     },
     _buildQueryString: function(name) {
       return {login : this._domainifyUsername(name)};
     },
     _usernameChanged: function(name) {
-      if (window.glgUserCache[name]) {
-        this.user = window.glgUserCache[name];
-      }
       return this.debounce('fetch', (function(_this) {
         return function() {
           return _this.$.xhr.generateRequest();
         };
       })(this), 200);
     },
-    _extractUserName: function(glgrootCookie, starphleetCookie, glgSAMCookie, glguserCookie) {
-      if (typeof starphleetCookie === 'string' && starphleetCookie) {
-        return starphleetCookie;
-      } else if (glgrootCookie === 'object' && glgrootCookie.username) {
-        return glgrootCookie.username;
-      } else if (typeof glgSAMCookie  === 'object' && glgSAMCookie.username) {
-        return glgSAMCookie.username;
-      } else if (glguserCookie) {
-        try {
-          return (JSON.parse(atob(glguserCookie))).username;
-        }
-        catch (err) {
-          console.error("Failed to extract username from glguserinfo cookie: " + err);
-          return '';
-        }
-      } else {
-        return '';
-      }
-    },
-    created: function() {
-      window.glgUserCache = window.glgUserCache || {};
+    ready: function () {
+      return this.debounce('fetch', (function(_this) {
+        return function() {
+          return _this.$.gdsEcho.generateRequest();
+        };
+      })(this), 200);
     }
   });
 </script>
