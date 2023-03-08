@@ -1,6 +1,6 @@
-<link rel="import" href="bower_components/polymer/polymer.html">
-<link rel="import" href="bower_components/iron-ajax/iron-ajax.html"></link>
-<script src="bower_components/js-cookie/src/js.cookie.js"></script>
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html"></link>
+<script src="../js-cookie/src/js.cookie.js"></script>
 
 <dom-module id="glg-current-user">
   <template>
@@ -35,7 +35,7 @@
     properties: {
       url: {
         type: String,
-        value: 'https://local.dev.glgresearch.com/epistream/epiquery1/glglive/glgCurrentUser/getUserByLogin.mustache',
+        value: 'https://epistream.glgresearch.com/epi/epiquery1/glglive/glgCurrentUser/getUserByLogin.mustache',
       },
       qs: {
         type: String,
@@ -44,7 +44,7 @@
       },
       echoUrl: {
         type: String,
-        value: 'https://local.dev.glgresearch.com/echo/'
+        value: 'https://testing.glgresearch.com/echo/'
       },
       username: {
         type: String,
